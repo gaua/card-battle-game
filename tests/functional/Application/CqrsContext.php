@@ -3,6 +3,7 @@
 namespace CardBattleGame\Tests\Functional\Application;
 
 use Behat\Behat\Context\Context;
+use CardBattleGame\Application\Command\CreateGame;
 use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Plugin\Router\CommandRouter;
 
@@ -13,8 +14,8 @@ final class CqrsContext implements Context
 
     public function __construct()
     {
-        $this->commandBus = new CommandBus($this->commandRouter);
         $this->commandRouter = new CommandRouter();
+        $this->commandBus = new CommandBus();
 
         $this->commandRouter->attachToMessageBus($this->getCommandBus());
     }
